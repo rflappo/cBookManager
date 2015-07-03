@@ -28,25 +28,28 @@ private:
 	bool _searchFlag;
 	bool _anyChange;
 	bool CheckIntegrityCategoryFile();
-	
+
 public:
 	cBookManager();
-	cBookManager(string openDBFile);	
+	cBookManager(string openDBFile);
 	void SetLastUpdate(); //Sets last time modified.
 	string GetLastUpdate();	//Gets last time modified.
+
 	int OpenDB(string); //Returns number of records in file.
 	int AddBook(sBook); //Returns number of records in _library.
-	int AddBook(cBook); //Returns number of records in _library.	
+	int AddBook(cBook); //Returns number of records in _library.
 	int RemoveBook(int); //Returns number of records in _library.
 	int ReplaceBook(int, sBook); //Returns number of records in _library.
 	int ReplaceBook(int, cBook); //Returns number of records in _library.
+
 	bool ChangeSearchStatusMode(); //Returns status of search mode setted; on/off
 	void EmptyData(); //Empties vectors.
-	void GetBook(int, cBook**); 
+	void GetBook(int, cBook**);
 	bool SaveDB();
 	bool SaveDB(string);
-	string EraseISBN(int i);
-	int GetSize();
+	int GetSize(); // última definición transcripta.
+
+	string EraseISBN(int i); // NPI en migración
 	void Sort(SortOps); //Choose sort option. Check enum(SortOps) above.
 	bool GetSearchStatusMode();
 	int Search(string, SearchOps); //Choose searh option. Check enum(SearchOps) above.
