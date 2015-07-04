@@ -1,4 +1,21 @@
 require_relative 'rBook.rb'
+
+#monkey patching
+class Fixnum
+  def seconds
+    self
+  end
+  def minutes
+    self * 60
+  end
+  def hours
+    self * 60 * 60
+  end
+  def days
+    self * 60 * 60 * 24
+  end
+end
+
 # Falta :
 #
 class RBookManager
@@ -19,8 +36,8 @@ class RBookManager
 
   end
 
-  def _setLastUpdate() #sets last time modified
-
+  def _setLastUpdate(epoch_time) #sets last time modified
+    #epoch_time is number of seconds since "UNIX time epoch"
   end
 
   def _addHashJsonBook(hashJsonBook) #just for db loading purposes
