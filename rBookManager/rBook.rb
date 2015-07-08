@@ -1,36 +1,22 @@
-class RBook
-  attr_accessor :_title, :_author, :_pages, :_editorial, :_isbn, :_info
-  attr_accessor :_price, :_stock, :_idCategory
+require 'dm-core'
+require 'dm-migrations'
 
-  def initialize()
-  end
+DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/bookdata.db")
 
-  def initialize(hashJsonBook) #hashJsonBook it is a hash.
-    @_title = hashJsonBook[:title]
-    @_author = hashJsonBook[:author]
-    @_pages = hashJsonBook[:pages]
-    @_editorial = hashJsonBook[:editorial]
-    @_isbn = hashJsonBook[:isbn]
-    @_info = hashJsonBook[:info]
-    @_price = hashJsonBook[:price]
-    @_stock = hashJsonBook[:stock]
-    @_idCategory = hashJsonBook[:category]
-  end
+class Book
+  include DataMapper::Resource
 
-  def getHashJsonBook()
-    auxHash = Hash.new
-    auxHash = {:title => @_title, :author => @_author, :editorial => @_editorial, :pages => @_pages, :isbn => @_isbn, :info => @_info, :price => @_price, :stock => @_stock, :category => @_idCategory}
-  end
+  property :_id, Serial
+  property :_title, String
+  property :_author, String
+  property :_pages, Integer
+  property :_editorial, String
+  property :_isbn, String
+  property :_info, Text, :length => 500000
+  property :_price, Float
+  property :_stock, Integer
+  property :_idCategory, Integer #it's the Category fkey.
 
-  def setHashJsonBook(hashJsonBook)
-      @_title = hashJsonBook[:title]
-      @_author = hashJsonBook[:author]
-      @_pages = hashJsonBook[:pages]
-      @_editorial = hashJsonBook[:editorial]
-      @_isbn = hashJsonBook[:isbn]
-      @_info = hashJsonBook[:info]
-      @_price = hashJsonBook[:price]
-      @_stock = hashJsonBook[:stock]
-      @_idCategory = hashJsonBook[:category]
-  end
 end
+
+DataMapper.finalize
